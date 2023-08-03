@@ -3,8 +3,9 @@ Python tkinter Interface for followed streams on Picarto.tv
 <br><br>
 ## dependencies
 - python [pillow](https://pypi.org/project/Pillow/)
-- Hoverinfo from [custom library](https://github.com/KATC14/python-custom-library)
-- utilities from [custom library](https://github.com/KATC14/python-custom-library)<br><br>
+- custom library [Hoverinfo](https://github.com/KATC14/python-custom-library)
+- custom library [utilities](https://github.com/KATC14/python-custom-library)
+- streamlink [cli](https://streamlink.github.io)<br><br>
 
 #
 oauth url `https://oauth.picarto.tv/authorize?response_type=token&client_id=&redirect_uri=&scope=readpub%20readpriv%20sudo%20write`
