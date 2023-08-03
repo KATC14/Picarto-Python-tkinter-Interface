@@ -16,7 +16,7 @@ first make a client [here](https://oauth.picarto.tv/client) and take its Client 
 
 the redirec uri can just be your picarto channel it goes under redirect_uri=
 
-copy the oauth token and place it in self.auth inside the file
+copy the oauth token and place it in `self.auth` inside the file
 
 you will get a link back that looks like this https://picarto.tv/YOUR_CHANNEL#access_token=TOKEN_HERE&token_type=Bearer&expires_in=1296000
 
