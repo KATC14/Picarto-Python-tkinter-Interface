@@ -1,6 +1,12 @@
 # Picarto-Python-tkinter-Interface
 Python tkinter Interface for followed streams on Picarto.tv
+<br><br>
+## dependencies
+- python [pillow](https://pypi.org/project/Pillow/)
+- Hoverinfo from [custom library](https://github.com/KATC14/python-custom-library)
+- utilities from [custom library](https://github.com/KATC14/python-custom-library)<br><br>
 
+#
 oauth url `https://oauth.picarto.tv/authorize?response_type=token&client_id=&redirect_uri=&scope=readpub%20readpriv%20sudo%20write`
 
 you must make a token using the oauth url
@@ -14,3 +20,10 @@ copy the oauth token and place it in self.auth inside the file
 you will get a link back that looks like this https://picarto.tv/YOUR_CHANNEL#access_token=TOKEN_HERE&token_type=Bearer&expires_in=1296000
 
 the token will expire every 15 days and need to be refreshed
+
+#
+variable MissingNames: for channels that have deactivated their account (unknown if it still works)
+
+variable StandoutNames: for channels you want to stand out
+
+when switching pages the picarto api acts strange and gives overlapping channels overlapped channels are shown in cyan
