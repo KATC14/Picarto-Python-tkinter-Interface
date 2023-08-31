@@ -131,6 +131,7 @@ class Picarto():
 				else:
 					rad = Radiobutton(self.RadFrame, text=nameS, style=f'R{i}.TRadiobutton', variable=self.selvar, value=i, command=self.sel)
 					rad.grid(sticky='NW', column=column, row=row)
+					rad.bind('<Button-2>', lambda e:self.chatlink(vars(e)['widget']['text']))
 					self.raidolist.append(rad)
 			#if len(self.raidolist) - len(self.data) != 0:self.raidolist.reverse()
 			#for i in reversed(range(len(self.raidolist) - len(self.data))):#for i in range(len(self.raidolist) - len(self.data)):
@@ -422,7 +423,7 @@ class Picarto():
 			filemenu.add_command(label="Page 7", command=lambda:self.Page(7))
 			filemenu.add_command(label="Page 8", command=lambda:self.Page(8))
 			filemenu.add_command(label="Page 9", command=lambda:self.Page(9))
-			#filemenu.add_command(label="Page 10", command=lambda:self.Page(10))
+			filemenu.add_command(label="Page 10", command=lambda:self.Page(10))
 			self.menubar.add_cascade(label="Change Page", menu=filemenu)
 
 			self.menubar.add_command(label="Online True", command=self.SO)#, cursor='hand2'
@@ -675,8 +676,8 @@ as there is less time for Streamlink to download segments and write their data t
 		self.labelP.grid(sticky='NE', column=0, row=5)
 		self.labelL.grid(sticky='NE', column=0, row=3)
 
-		chatlink = lambda:webbrowser.open(f'https://picarto.tv/chatpopout/{self.name}/public', new=1, autoraise=True)
-		self.Chat = Button(self.root, text="Open Chat", command=chatlink)#lambda:start_thread(34)
+		self.chatlink = lambda e:webbrowser.open(f'https://picarto.tv/chatpopout/{e}/public', new=1, autoraise=True)
+		self.Chat = Button(self.root, text="Open Chat", command=lambda:self.chatlink(self.name))#lambda:start_thread(34)
 		self.startbtn = Button(self.root, text="Start Stream")#, command=lambda:self.start_thread(0)
 		#refresh = Button(self.root, text="Refresh Streams", command=self.start)
 
