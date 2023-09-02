@@ -131,7 +131,7 @@ class Picarto():
 				else:
 					rad = Radiobutton(self.RadFrame, text=nameS, style=f'R{i}.TRadiobutton', variable=self.selvar, value=i, command=self.sel)
 					rad.grid(sticky='NW', column=column, row=row)
-					rad.bind('<Button-2>', lambda e:self.chatlink(vars(e)['widget']['text']))
+					rad.bind('<Button-2>', lambda e, rad=rad:self.chatlink(rad['text']))
 					self.raidolist.append(rad)
 			#if len(self.raidolist) - len(self.data) != 0:self.raidolist.reverse()
 			#for i in reversed(range(len(self.raidolist) - len(self.data))):#for i in range(len(self.raidolist) - len(self.data)):
