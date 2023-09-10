@@ -142,7 +142,7 @@ class Picarto():
 			exitcount = 5
 			while exitcount >= 0:
 				os.system('cls')
-				print(f'Picarto Python Interface [{self.version}]')
+				print('Picarto Python tkinter Interface')
 				print(response)
 				print()
 				print('exiting in', exitcount)
@@ -408,6 +408,7 @@ class Picarto():
 		#for tabs in self.note.tabs():print(tabs)
 		self.note.tab(tab_id=self.RadFrame, text=f'page {self.pagenum}')
 		self.start(changepage=True)
+
 	def menubarStart(self):
 		self.menubar = tkinter.Menu(self.root)
 		try:
@@ -463,6 +464,7 @@ class Picarto():
 			print(traceback.format_exc())
 		self.menubar.add_command(label="Refresh Streams", command=self.start)
 		self.root.config(menu=self.menubar)
+
 	def loglevel(self, event):
 		level = f"--loglevel {event}"
 		self.streamaugs['level'] = level
@@ -604,6 +606,7 @@ as there is less time for Streamlink to download segments and write their data t
 			self.duration.config(text='video duration: NA')
 			self.tooltip.text = f"left click to open video\nright click to open video popout"
 			self.videostart()
+
 	def HeaderFormat(self, args):
 		Headers = {}
 		for k, v in args.items():
@@ -635,7 +638,7 @@ as there is less time for Streamlink to download segments and write their data t
 		self.VidFrame = Frame(self.note)
 		self.note.add(self.RadFrame, text="page 1")#self.tab1
 		self.note.add(self.VidFrame, text="videos")
-		self.note.grid(sticky='S', row=7)
+		self.note.grid(sticky='S', row=8)
 		self.note.bind("<<NotebookTabChanged>>", self.change)
 
 		#self.RadFrame = Frame(self.tab1, borderwidth=2, relief='sunken')
@@ -662,26 +665,26 @@ as there is less time for Streamlink to download segments and write their data t
 
 		self.root.iconphoto(self.root, iconimg)
 		#self.root.config(bg='#243299')
-		self.label.grid(sticky='NE', column=0, row=0)
-		self.label1.grid(sticky='NE', column=0, row=1)
-		self.label2.grid(sticky='NE', column=0, row=2)
+		self.label.grid(sticky='NE', column=0, row=1)
+		self.label1.grid(sticky='NE', column=0, row=2)
+		self.label2.grid(sticky='NE', column=0, row=3)
 		self.label3.grid(sticky='NW', column=0, row=1)
 		self.label4.grid(sticky='NW', column=0, row=3)
 		self.label5.grid(sticky='NW', column=0, row=2)
 		#self.label6.grid(sticky='NW', column=0, row=0)
 
-		self.labelF.grid(sticky='SE', column=0, row=6)
+		self.labelF.grid(sticky='SE', column=0, row=7)
 		self.duration.grid(sticky='SW', column=0, row=6)
-		self.labelI2.grid(sticky='NW', column=0, row=5)
-		self.labelP.grid(sticky='NE', column=0, row=5)
-		self.labelL.grid(sticky='NE', column=0, row=3)
+		self.labelI2.grid(sticky='NW', column=0, row=6)
+		self.labelP.grid(sticky='NE', column=0, row=6)
+		self.labelL.grid(sticky='NE', column=0, row=4)
 
 		self.chatlink = lambda e:webbrowser.open(f'https://picarto.tv/chatpopout/{e}/public', new=1, autoraise=True)
 		self.Chat = Button(self.root, text="Open Chat", command=lambda:self.chatlink(self.name))#lambda:start_thread(34)
 		self.startbtn = Button(self.root, text="Start Stream")#, command=lambda:self.start_thread(0)
 		#refresh = Button(self.root, text="Refresh Streams", command=self.start)
 
-		self.Chat.grid(sticky='SW', column=0, row=5)
+		self.Chat.grid(sticky='SW', column=0, row=6)
 		#refresh.grid(sticky='SW', column=0, row=5)
 		self.startbtn.grid(sticky='NW', column=0, row=0)
 
