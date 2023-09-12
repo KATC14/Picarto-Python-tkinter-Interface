@@ -674,7 +674,7 @@ as there is less time for Streamlink to download segments and write their data t
 		#self.label6.grid(sticky='NW', column=0, row=0)
 
 		self.labelF.grid(sticky='SE', column=0, row=7)
-		self.duration.grid(sticky='SW', column=0, row=6)
+		self.duration.grid(sticky='SW', column=0, row=7)
 		self.labelI2.grid(sticky='NW', column=0, row=6)
 		self.labelP.grid(sticky='NE', column=0, row=6)
 		self.labelL.grid(sticky='NE', column=0, row=4)
