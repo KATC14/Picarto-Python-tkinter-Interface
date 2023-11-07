@@ -35,7 +35,7 @@ class Picarto():
 
 		self.auth = ""
 
-		self.data = self.labelold = None
+		self.data = self.labelold = self.url = None
 		self.LiveFirst = self.onwhattab = self.FWrating = True
 		self.pchbool = self.PHttp = self.Pfifo = self.hssd = False
 		self.streamaugs, self.cache, self.raidolist = {}, {}, []
@@ -57,7 +57,7 @@ class Picarto():
 	def start_thread(self, event):
 		aug = ''
 		for i in self.streamaugs.values(): aug += f"{i} "
-		if event == 0: self.thread = threading.Thread(target=lambda: self.stream(f'{aug}https://picarto.tv/{self.name}'))
+		if event == 0: self.thread = threading.Thread(target=lambda: self.stream(f'{aug}{self.url}'))
 		if event == 1: self.thread = threading.Thread(target=lambda: self.stream(f"{aug}{self.videofile}"))
 		self.thread.start()
 		self.root.after(20, self.check_thread)
@@ -152,8 +152,9 @@ class Picarto():
 
 	def stream(self, file):
 		print(file)
+		who = self.name
 		os.system(f'streamlink {file} best')
-		print(f"stopped {utilities.time_stamp('%Y-%m-%d %I:%M:%S %p')}")
+		print(f"{who} stopped {utilities.time_stamp('%Y-%m-%d %I:%M:%S %p')}")
 
 	def sel(self, multi=False):
 		nameindex = self.selvar.get()
@@ -179,7 +180,8 @@ class Picarto():
 			self.ncSwitch = 1
 
 		#url = self.genaricurl.format(self.name)
-		
+		self.url = f"https://picarto.tv/{self.name}"
+
 		response = utilities.url_request(f"{self.genaricurl}/channel/name/{self.name}", utilities.generic_header({"ua":"m5"}))
 		if response.status == 200:
 			channel_url    = json.loads(response.read())
@@ -453,6 +455,14 @@ class Picarto():
 			augmenu.add_command(label='ringbuffer-size 50M', command=self.playerRBF)
 			augmenu.add_cascade(label="loglevel None", menu=loglevel)
 
+			picarto_server = tkinter.Menu(augmenu, tearoff=0)
+			picarto_server.add_command(label='newyork',    command=lambda:self.switch_server('edge1-us-newyork'))
+			picarto_server.add_command(label='losangeles', command=lambda:self.switch_server('edge1-us-losangeles'))
+			picarto_server.add_command(label='dallas',     command=lambda:self.switch_server('edge1-us-dallas'))
+			picarto_server.add_command(label='dallas 1',   command=lambda:self.switch_server('1-edge1-us-dallas'))
+			picarto_server.add_command(label='miami',      command=lambda:self.switch_server('edge1-us-miami'))
+			augmenu.add_cascade(label="picarto server", menu=picarto_server)
+
 			blank = tkinter.Menu(augmenu, tearoff=0)
 			blank.add_command(label='blank')#, command=lambda:self.playerPT(None)
 			augmenu.add_cascade(label="blank", menu=blank)
@@ -465,6 +475,8 @@ class Picarto():
 		self.menubar.add_command(label="Refresh Streams", command=self.start)
 		self.root.config(menu=self.menubar)
 
+	def switch_server(self, event):
+		self.url = f"https://{event}.picarto.tv/stream/hls/golive+{self.name}/index.m3u8"
 	def loglevel(self, event):
 		level = f"--loglevel {event}"
 		self.streamaugs['level'] = level
