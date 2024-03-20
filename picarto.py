@@ -456,6 +456,7 @@ class Picarto():
 			augmenu.add_cascade(label="loglevel None", menu=loglevel)
 
 			picarto_server = tkinter.Menu(augmenu, tearoff=0)
+			picarto_server.add_command(label='None',       command=lambda: self.switch_server('None'))
 			picarto_server.add_command(label='newyork',    command=lambda:self.switch_server('edge1-us-newyork'))
 			picarto_server.add_command(label='losangeles', command=lambda:self.switch_server('edge1-us-losangeles'))
 			picarto_server.add_command(label='dallas',     command=lambda:self.switch_server('edge1-us-dallas'))
@@ -477,6 +478,8 @@ class Picarto():
 
 	def switch_server(self, event):
 		self.url = f"https://{event}.picarto.tv/stream/hls/golive+{self.name}/index.m3u8"
+		if event == 'None':
+			self.url = f"https://picarto.tv/{self.name}"
 	def loglevel(self, event):
 		level = f"--loglevel {event}"
 		self.streamaugs['level'] = level
